@@ -5,53 +5,67 @@ Notice that the solution set must not contain duplicate triplets.
 '''
 
 class Solution:
+    # def threeSum(self, nums):
+    #     if nums.__len__() < 3:
+    #         return []
+    #
+    #     numsAmountMap = dict()
+    #     for n in nums:
+    #         if n in numsAmountMap:
+    #             numsAmountMap[n] += 1
+    #         else:
+    #             numsAmountMap[n] = 1
+    #
+    #     keyList = list(numsAmountMap.keys())
+    #     keyList.sort()
+    #
+    #     outputList = list()
+    #
+    #     for idxI, i in enumerate(keyList):
+    #         if i > 0:
+    #             return outputList
+    #         for idxJ, j in enumerate(keyList[(idxI if numsAmountMap[i] > 1 else idxI + 1):]):
+    #             firstTwoSum = i + j
+    #             if firstTwoSum > 0:
+    #                 continue
+    #             thirdNum = 0 - firstTwoSum
+    #             idxJ = keyList.index(j)
+    #             if thirdNum in keyList[(idxJ if numsAmountMap[j] > 1 else idxJ + 1):]:
+    #                 if (thirdNum == 0 and numsAmountMap[0] < 3) or (thirdNum == j and numsAmountMap[thirdNum] < 2):
+    #                     break
+    #                 outputList.append([i, j, thirdNum])
+    #
+    #     return outputList
     def threeSum(self, nums):
+        outputList = []
         if nums.__len__() < 3:
-            return []
-        # print(nums)
+            return outputList
 
-        numsAmountMap = dict()
-        for n in nums:
-            if n in numsAmountMap:
-                numsAmountMap[n] += 1
-            else:
-                numsAmountMap[n] = 1
+        nums.sort()
+        numsSet = set(nums)
 
-        keyList = list(numsAmountMap.keys())
-        keyList.sort()
-
-        # print(keyList)
-        # print(numsAmountMap)
-
-        outputList = list()
-
-        for idxI, i in enumerate(keyList):
-            if i > 0:
-                # print(1)
-                return outputList
-            for idxJ, j in enumerate(keyList[(idxI if numsAmountMap[i] > 1 else idxI + 1):]):
-                firstTwoSum = i + j
-                if firstTwoSum > 0:
-                    # print(2)
-                    continue
-                    # return outputList
-                thirdNum = 0 - firstTwoSum
-                idxJ = keyList.index(j)
-                if thirdNum in keyList[(idxJ if numsAmountMap[j] > 1 else idxJ + 1):]:
-                # if thirdNum in keyList[(idxI + idxJ if numsAmountMap[j] > 1 else idxI + idxJ + 1):]:
-                    if (thirdNum == 0 and numsAmountMap[0] < 3) or (thirdNum == j and numsAmountMap[thirdNum] < 2):
-                        # print('1')
-                        # print(3)
-                        break
-                    # if (thirdNum == j and numsAmountMap[thirdNum] < 2) or (j > thirdNum):
-                    #     print(4)
-                        # break
-                    # if (j > thirdNum):
-                    #     break
-                    outputList.append([i, j, thirdNum])
-                    # print([i, j, thirdNum])
+        for fixedNumber in numsSet:
+            idxLeftNum = nums.index(fixedNumber)
+            idxRightNum = nums.__len__() - 1
+            leftNum = nums[idxLeftNum]
+            rightNum = nums[idxRightNum]
+            while idxLeftNum != idxRightNum:
+                threeNumsSum = fixedNumber + leftNum + rightNum
+                if threeNumsSum < 0:
+                    idxLeftNum += 1
+                elif threeNumsSum > 0:
+                    idxRightNum -= 1
+                elif threeNumsSum == 0:
+                    idxLeftNum += 1
+                    idxRightNum -= 1
+                    outputList.append([fixedNumber, leftNum, rightNum])
+                while nums[idxLeftNum] == nums[idxLeftNum - 1]:
+                    idxLeftNum += 1
+                while nums[idxRightNum] == nums[idxRightNum - 1]:
+                    idxRightNum -= 1
 
         return outputList
+
 
 if __name__ == '__main__':
     s = Solution()
