@@ -21,14 +21,23 @@ Given an integer, convert it to a roman numeral.
 
 class Solution1:
     def intToRoman(self, num: int) -> str:
+        PATTERNS = ["I", "V", "X", "L", "C", "D", "M"]
         n = str(num)
-        def numberStrToRoman(n: str, p) -> str:
+        def numberStrToRoman(n: str, p=0) -> str:
             if n.__len__() > 1:
-                return numberStrToRoman(n[0], p) + numberStrToRoman(n[1:], p)
+                return numberStrToRoman(n[0:-1], p + 2) + numberStrToRoman(n[-1], p)
             else:
-                pass
+                number = int(n)
+                if number <= 3:
+                    return PATTERNS[p] * number
+                elif number <= 4:
+                    return PATTERNS[p] + PATTERNS[p + 1]
+                elif number <= 8:
+                    return PATTERNS[p + 1] + PATTERNS[p] * (number - 5)
+                else:
+                    return PATTERNS[p] + PATTERNS[p + 2]
 
-        return numberStrToRoman(n, p)
+        return numberStrToRoman(n)
 
 if __name__ == "__main__":
     num = 3
