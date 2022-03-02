@@ -9,8 +9,18 @@ Open brackets must be closed in the correct order.
 
 
 class Solution:
+    def containSubStr(self, s, pList):
+        for subStr in pList:
+            if s.__contains__(subStr):
+                return True
+        return False
+
     def isValid(self, s: str) -> bool:
-        pass
+        for p in ("()", "[]", "{}"):
+            if self.containSubStr(s, ("()", "[]", "{}")):
+                s = s.replace(p, "")
+
+
 
 if __name__ == '__main__':
     s = Solution()
@@ -18,3 +28,4 @@ if __name__ == '__main__':
     print(s.isValid("()")) ## True
     print(s.isValid("()[]{}")) ## True
     print(s.isValid("(]")) ## False
+    print("{{}}}}()}[]".__contains__(("{[[[", "{}")))
