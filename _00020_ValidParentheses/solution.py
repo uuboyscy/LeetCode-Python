@@ -15,6 +15,29 @@ class Solution:
                 s = s.replace(p, "")
         return s.__len__() == 0
 
+    def isValid(self, s: str) -> bool:
+        symbolMap = {
+            "(": 1,
+            "[": 2,
+            "{": 3,
+            ")": -1,
+            "]": -2,
+            "}": -3
+        }
+        sList = list(s)
+        stackList = [symbolMap[sList[0]]]
+        sSum = 0
+
+        for symbol in sList[1:]:
+            if symbolMap[symbol] < 0 and symbolMap[symbol] + stackList[-1] == 0:
+                del stackList[-1]
+            elif symbolMap[symbol] < 0:
+                return False
+            else:
+                stackList.append(symbol)
+
+        return stackList == []
+
 
 
 if __name__ == '__main__':
