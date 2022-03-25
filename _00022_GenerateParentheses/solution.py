@@ -4,19 +4,21 @@ Given n pairs of parentheses, write a function to generate all combinations of w
 
 class Solution:
     def generateParenthesis(self, n: int) -> list[str]:
-        def insertOneBlucket(bkListArr: list[str]) -> list[str]:
+        def insertBrackets(bkListArr: list[str]) -> list[str]:
             outputSet = set()
+            bkStrListLen = bkListArr[0].__len__()
             for bkStr in bkListArr:
-                outputSet.add("".join([bkStr] + ["(", ")"]))
-                outputSet.add("".join(["(", ")"] + [bkStr]))
-                outputSet.add("".join(["("] + [bkStr] + [")"]))
+                bkStrList = list(bkStr)
+                for i in range(0, bkStrListLen + 1):
+                    bkStrList.insert(i, "()")
+                    outputSet.add("".join(bkStrList))
+                    bkStrList.pop(i)
             return list(outputSet)
 
         if n == 1:
             return ["()"]
         else:
-            # [bkStr.split("") for bkStr in self.generateParenthesis(n - 1)]
-            return insertOneBlucket(self.generateParenthesis(n - 1))
+            return insertBrackets(self.generateParenthesis(n - 1))
 
 
 if __name__ == '__main__':
