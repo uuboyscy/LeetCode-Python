@@ -44,14 +44,20 @@
 #
 # class Solution:
 #     def mergeKLists(self, lists: list[Optional[ListNode]]) -> Optional[ListNode]:
-#         def append(ll: ListNode, appendedLl: ListNode) -> ListNode:
-#             operatedLl = ll
-#             while operatedLl.next != None:
-#                 operatedLl = operatedLl.next
-#             operatedLl.next = appendedLl
-#             return ll
+#         def list2LinkedList(inputList: list) -> ListNode:
+#             outputLinkedList = None
+#             tmpLinkedList = None
+#             for n, i in enumerate(inputList[::-1]):
+#                 if n == 0:
+#                     tmpLinkedList = ListNode(i)
+#                 else:
+#                     outputLinkedList = ListNode(i)
+#                     outputLinkedList.next = tmpLinkedList
+#                     tmpLinkedList = outputLinkedList
 #
-#         outputListNode = ListNode()
+#             return outputLinkedList
+#
+#         outputList = list()
 #         isAnyOneValid = False
 #         # minNumber = -10e+4
 #         maxNumber = 10e+4
@@ -76,11 +82,11 @@
 #                 if ll.val <= tmpMinNumber:
 #                     tmpMinNumber = ll.val
 #                     tmpIdx = idx
-#             append(outputListNode, ListNode(val=tmpMinNumber))
+#             outputList.append(tmpMinNumber)
 #             if isAnyOneValid and tmpIdx != -1:
 #                 lists[tmpIdx] = lists[tmpIdx].next
 #
-#         return outputListNode.next
+#         return list2LinkedList(outputList)
 #
 #
 # if __name__ == '__main__':
