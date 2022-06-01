@@ -130,5 +130,6 @@ dmypy.json
 
 .idea
 ./tmp/
-test.py
+test/test.py
 *.ipynb
+/test/
