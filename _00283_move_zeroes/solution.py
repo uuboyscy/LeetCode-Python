@@ -12,8 +12,6 @@ class Solution:
         non_zero_index = 0
         for idx, num in enumerate(nums):
             if num != 0:
-                # tmp_num = nums.pop(idx)
-                # nums.insert(non_zero_index, tmp_num)
                 nums[idx] = 0
                 nums[non_zero_index] = num
                 non_zero_index += 1
