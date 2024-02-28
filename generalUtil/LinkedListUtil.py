@@ -19,3 +19,9 @@ def list2LinkedList(inputList: list) -> ListNode:
             tmpLinkedList = outputLinkedList
 
     return outputLinkedList
+
+def printLinkedList(ll: ListNode):
+    while ll != None:
+        print(ll.val, end=' ')
+        ll = ll.next
+    print()
