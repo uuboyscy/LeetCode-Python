@@ -2,7 +2,9 @@
 Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
 """
 from __future__ import annotations
-import sys; sys.path.append("./")
+
+import sys, os; sys.path.append(os.path.dirname(__file__) + "/..")
+
 from generalUtil.LinkedListUtil import list2LinkedList, printLinkedList
 
 # Definition for singly-linked list.
