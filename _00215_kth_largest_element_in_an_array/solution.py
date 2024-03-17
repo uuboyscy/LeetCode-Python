@@ -11,7 +11,6 @@ import heapq
 
 class Solution:
     def findKthLargest(self, nums: list[int], k: int) -> int:
-        """Get  [len(nums) - k + 1]th smallest interger"""
         nums = [-n for n in nums]
         heapq.heapify(nums)
         n = 1
